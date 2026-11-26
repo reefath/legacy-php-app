@@ -1,24 +1,26 @@
 <?php
 namespace App;
 
+#[\AllowDynamicProperties]
 class Notes
 {
-    // Deprecated in PHP 8.4: implicitly nullable parameter type.
-    public function title(string $text = null)
+    // Implicitly nullable parameter types are deprecated in PHP 8.4; declared explicitly.
+    public function title(?string $text = null)
     {
         return strtoupper(trim($text === null ? 'untitled' : $text));
     }
 
-    // Deprecated in PHP 8.2: creation of dynamic properties.
+    // Dynamic property creation is deprecated in PHP 8.2; the class opts in via
+    // #[\AllowDynamicProperties] so arbitrary tag names keep working.
     public function tag($name)
     {
         $this->{$name} = true;
         return $this;
     }
 
-    // Deprecated in PHP 8.2: "${var}" string interpolation.
+    // "${var}" string interpolation is deprecated in PHP 8.2; "{$var}" used.
     public function greet($user)
     {
-        return "Hello ${user}";
+        return "Hello {$user}";
     }
 }

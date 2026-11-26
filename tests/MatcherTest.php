@@ -8,6 +8,6 @@ class MatcherTest extends TestCase
     {
         $m = new Matcher();
         $this->assertTrue($m->isZeroLike(0));
-        $this->assertTrue($m->isZeroLike('abc')); // true on 7.4, false on 8.x
+        $this->assertFalse($m->isZeroLike('abc')); // true on 7.4, false on 8.x
     }
 }
