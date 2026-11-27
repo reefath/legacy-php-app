@@ -3,9 +3,9 @@ namespace App;
 
 class Initials
 {
-    // Curly-brace string offsets were removed in PHP 8.0 (parse error).
+    // Bracket string offset (curly-brace offsets were removed in PHP 8.0).
     public function first($text)
     {
-        return $text{0};
+        return $text[0];
     }
 }
