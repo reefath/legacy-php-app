@@ -11,21 +11,21 @@ class Inventory
 
     public function add($sku, $qty)
     {
-        $this->items[$sku] = (isset($this->items[$sku]) ? $this->items[$sku] : 0) + $qty;
+        $this->items[$sku] = ($this->items[$sku] ?? 0) + $qty;
     }
 
-    // each() was removed in PHP 8.0 -> fatal "Call to undefined function each()".
+    // each() was removed in PHP 8.0; array_key_first() returns the same first
+    // key (null for an empty inventory, as the old false pair did).
     public function firstSku()
     {
-        reset($this->items);
-        $pair = each($this->items);
-        return $pair ? $pair['key'] : null;
+        return array_key_first($this->items);
     }
 
-    // count(null) throws TypeError in PHP 8.0 (it was a warning in 7.x).
+    // count(null) throws TypeError in PHP 8.0 (it was a warning returning 0 in 7.x);
+    // null is normalized explicitly to keep the 0 result.
     public function lineCount($lines)
     {
-        return count($lines);
+        return count($lines ?? []);
     }
 
     public function total()
