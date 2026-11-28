@@ -15,7 +15,8 @@ class InventoryTest extends TestCase
 
     public function testLineCountOfNothingIsZero()
     {
-        // 7.4: count(null) returns 0 with a warning. 8.x: TypeError.
-        $this->assertSame(0, @(new Inventory())->lineCount(null));
+        // 7.4: count(null) returned 0 with a warning; 8.x would throw TypeError.
+        // lineCount() normalizes null, so no error suppression is needed.
+        $this->assertSame(0, (new Inventory())->lineCount(null));
     }
 }
